@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-//导入 vuex 持久化存储
+// 导入 vuex 持久化存储
 import createPersistedState from "vuex-persistedstate";
 
 import user from "@/store/user";
@@ -13,9 +13,10 @@ export default createStore({
     category,
   },
   plugins: [
+    // 配置持久化数据存储
     createPersistedState({
-      paths: [],
-      key: "",
+      key: "rabbit-client-pc",
+      paths: ["user", "cart"],
     }),
   ],
 });
