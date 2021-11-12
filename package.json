@@ -8,8 +8,10 @@
     "dev": "vue-cli-service serve"
   },
   "dependencies": {
+    "@vueuse/core": "^6.8.0",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "normalize.css": "^8.0.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0",

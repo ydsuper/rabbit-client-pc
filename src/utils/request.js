@@ -120,7 +120,7 @@ const baseRequest = (options) => {
           return Promise.reject(data);
         }
         // 返回获取数据
-        return Promise.resolve(data.data);
+        return Promise.resolve(data);
       }
     })
     .catch((err) => {
