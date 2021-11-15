@@ -102,7 +102,6 @@ const baseRequest = (options) => {
   return instance(options)
     .then((res) => {
       console.log("options", options);
-      console.log("请求", res);
       const data = res.data || {};
       // 请求失败时
       if (res.status !== 201 && res.status !== 200) {

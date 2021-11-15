@@ -2,7 +2,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 /**
  * 【滚动距离】
- * @returns {{scrollTop: Ref<UnwrapRef<number>>}}
+ * @returns {Ref<UnwrapRef<number>>}
  */
 export default function useScrollTop() {
   const scrollTop = ref(0);

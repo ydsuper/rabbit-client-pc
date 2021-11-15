@@ -1,16 +1,41 @@
 <template>
   <div class="home-category">
     <ul class="menu">
-      <li v-for="item in menuList" :key="item.id" @mouseenter="current = item">
+      <li
+        :class="{ active: current && current.id == item.id }"
+        v-for="item in menuList"
+        :key="item.id"
+        @mouseenter="current = item"
+      >
         <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
-        <RouterLink
-          v-for="subItem in item.children"
-          :key="subItem.id"
-          :to="`/category/sub/${subItem.id}`"
-          >{{ subItem.name }}</RouterLink
-        >
+        <template v-if="item.children?.length">
+          <RouterLink
+            v-for="subItem in item.children"
+            :key="subItem.id"
+            :to="`/category/sub/${subItem.id}`"
+            >{{ subItem.name }}</RouterLink
+          >
+        </template>
+        <!-- 骨架 start -->
+        <template v-else>
+          <XtxSkeleton
+            animated="fade"
+            width="60px"
+            height="18px"
+            bg="rgba(255,255,255,0.2)"
+            style="margin-right: 5px"
+          />
+          <XtxSkeleton
+            animated="fade"
+            width="60px"
+            height="18px"
+            bg="rgba(255,255,255,0.2)"
+          />
+        </template>
+        <!-- 骨架 end -->
       </li>
     </ul>
+    <!--  左菜单栏hover弹窗 start  -->
     <div class="layer" v-if="current">
       <h4>分类商品推荐 <small>根据您的购买或浏览记录推荐</small></h4>
       <ul v-if="current.goods">
@@ -25,18 +50,35 @@
           </RouterLink>
         </li>
       </ul>
+      <!-- 推荐 -->
+      <ul v-if="current.brands">
+        <li v-for="item in current.brands" :key="item.id">
+          <RouterLink to="/">
+            <img :src="item.picture" :alt="item.name" />
+            <div class="info">
+              <p class="place">
+                <i class="iconfont icon-dingwei"></i>{{ item.place }}
+              </p>
+              <p class="name ellipsis">{{ item.name }}</p>
+              <p class="desc ellipsis-2">{{ item.nameEn }}</p>
+            </div>
+          </RouterLink>
+        </li>
+      </ul>
     </div>
+    <!--  左菜单栏hover弹窗 end  -->
   </div>
 </template>
 
 <script>
-import useMenuList from "@/hooks/category/useMenuList";
+import useMenuList from "@/hooks/home/useMenuList";
 import { ref } from "vue";
 
 export default {
   name: "HomeCategory",
   setup() {
     const menuList = useMenuList();
+    // 定义当前移入的左菜单栏
     const current = ref(null);
     return { menuList, current };
   },
@@ -54,7 +96,8 @@ export default {
       padding-left: 40px;
       height: 50px;
       line-height: 50px;
-      &:hover {
+      &:hover,
+      &.active {
         background-color: @xtxColor;
       }
       a {
@@ -98,6 +141,24 @@ export default {
         background: #fff;
         &:nth-child(3n) {
           margin-right: 0;
+        }
+        &.brand {
+          height: 180px;
+          a {
+            align-items: flex-start;
+            img {
+              width: 120px;
+              height: 160px;
+            }
+            .info {
+              p {
+                margin-top: 8px;
+              }
+              .place {
+                color: #999;
+              }
+            }
+          }
         }
         a {
           display: flex;

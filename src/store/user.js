@@ -1,5 +1,3 @@
-import { getCategoriesAPI } from "@/api/home";
-
 const user = {
   namespaced: true, //开启命名空间
   state() {

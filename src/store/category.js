@@ -6,7 +6,7 @@ const category = {
   namespaced: true, //开启命名空间
   state() {
     return {
-      list: topCategories.map((name) => ({ name })), //分类列表
+      list: topCategories.map((name, i) => ({ name, id: i })), //分类列表
     };
   },
   mutations: {
