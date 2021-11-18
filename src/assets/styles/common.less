@@ -100,3 +100,19 @@ ul {
   line-height: 0;
   clear: both;
 }
+
+/* 默认transition动画 */
+// .fade-leave-active {}
+// .fade-leave-to {}
+.fade {
+  &-leave {
+    &-active {
+      position: absolute;
+      transition: opacity 0.5s 0.2s;
+      z-index: 1;
+    }
+    &-to {
+      opacity: 0;
+    }
+  }
+}

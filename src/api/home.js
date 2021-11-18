@@ -34,3 +34,28 @@ export function getBanners(distributionSite = 1) {
 export function getNewGoods(limit = 4) {
   return request.get("/home/new", { limit });
 }
+
+/**
+ * 获取人气推荐
+ * @returns {*}
+ */
+export function getHomeHot() {
+  return request.get("/home/hot");
+}
+
+/**
+ * 获取产品区块
+ * @returns {*}
+ */
+export function getProducts() {
+  return request.get("/home/goods");
+}
+
+/**
+ * 获取最新专题
+ * @param limit 限制数据数量
+ * @returns {*}
+ */
+export function getSpecial(limit) {
+  return request.get("/home/special", { limit });
+}

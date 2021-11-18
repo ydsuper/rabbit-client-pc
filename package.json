@@ -5,7 +5,8 @@
   "scripts": {
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "vue-cli-service serve"
+    "dev": "vue-cli-service serve",
+    "dev2":"vue-cli-service serve --mode dev2"
   },
   "dependencies": {
     "@vueuse/core": "^6.8.0",

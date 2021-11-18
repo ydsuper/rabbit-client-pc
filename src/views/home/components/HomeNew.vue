@@ -1,30 +1,37 @@
 <template>
-  <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱">
+  <HomePanel title="新鲜好物" subTitle="新鲜出炉 品质靠谱" ref="target">
     <template v-slot:right>
       <XtxMore />
     </template>
     <template v-slot:default>
-      <ul class="goods-list" v-if="goods">
-        <li v-for="item in goods" :key="item.id">
-          <RouterLink to="/">
-            <img :src="item.picture" alt="item.name" />
-            <p class="name ellipsis">{{ item.name }}</p>
-            <p class="price">&yen;{{ item.price }}</p>
-          </RouterLink>
-        </li>
-      </ul>
+      <Transition name="fade">
+        <ul class="goods-list" v-if="goods">
+          <li v-for="item in goods" :key="item.id">
+            <RouterLink to="/">
+              <img :src="item.picture" alt="item.name" />
+              <p class="name ellipsis">{{ item.name }}</p>
+              <p class="price">&yen;{{ item.price }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+        <HomeSkeleton v-else />
+      </Transition>
     </template>
   </HomePanel>
 </template>
 <script>
 import HomePanel from "@/views/home/components/HomePanel";
-import useNewGoods from "@/hooks/home/useNewGoods";
+// import useNewGoods from "@/hooks/home/useNewGoods";
+import useLazyData from "@/hooks/useLazyData";
+import { getNewGoods } from "@/api/home";
+import HomeSkeleton from "@/views/home/components/HomeSkeleton";
 export default {
   name: "HomeNew",
-  components: { HomePanel },
+  components: { HomeSkeleton, HomePanel },
   setup() {
-    const goods = useNewGoods();
-    return { goods };
+    // const goods = useNewGoods();
+    const { target, result: goods } = useLazyData(getNewGoods);
+    return { goods, target };
   },
 };
 </script>
