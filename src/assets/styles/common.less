@@ -116,3 +116,24 @@ ul {
     }
   }
 }
+
+/* 面包屑组件transition动画 */
+.fade-right {
+  &-enter-from,
+  &-leave-to{
+    transform: translateX(20px);
+    opacity: 0;
+  }
+
+  &-enter-active,
+  &-leave-active{
+    transition: all .5s;
+  }
+
+  &-enter-to,
+  &-leave-from {
+    transform: none;
+    opacity: 1;
+  }
+}
+

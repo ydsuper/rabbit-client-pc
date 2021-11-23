@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import useBanners from "@/hooks/home/useBanners";
+import useBanners from "@/hooks/useBanners";
 
 export default {
   name: "HomeBanner",

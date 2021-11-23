@@ -36,12 +36,12 @@ export default {
     const category = store.state["category"];
 
     const open = (index) => {
-      console.log("open:", index);
+      // console.log("open:", index); //@log
       store.commit("category/open", index);
     };
 
     const close = (index) => {
-      console.log("close:", index);
+      // console.log("close:", index);  //@log
       store.commit("category/close", index);
     };
 

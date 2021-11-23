@@ -18,11 +18,11 @@ const routes = [
     component: HomePage,
   },
   {
-    path: "/home/:id",
+    path: "/category/:id",
     component: TopCategoryPage,
   },
   {
-    path: "/home/sub/:id",
+    path: "/category/sub/:id",
     component: SubCategoryPage,
   },
 ];
@@ -30,6 +30,10 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  // 每次跳转返回顶部
+  scrollBehavior() {
+    return { top: 0 };
+  },
 });
 
 export default router;

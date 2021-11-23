@@ -2,9 +2,9 @@
 import { getBanners } from "@/api/home";
 import { ref } from "vue";
 
-export default function useBanners() {
+export default function useBanners(distributionSite = 1) {
   let banners = ref(null);
-  getBanners().then((res) => {
+  getBanners(distributionSite).then((res) => {
     banners.value = res.result;
   });
   return banners;
