@@ -11,6 +11,10 @@ const SubCategoryPage = () =>
   import(
     /*webpackChunkName: 'CategoryPage'*/ "@/views/category/SubCategoryPage"
   );
+const GoodsDetailPage = () =>
+  import(
+    /*webpackChunkName: 'GoodsDetailPage'*/ "@/views/goods/GoodsDetailPage"
+  );
 
 const routes = [
   {
@@ -24,6 +28,10 @@ const routes = [
   {
     path: "/category/sub/:id",
     component: SubCategoryPage,
+  },
+  {
+    path: "/goods/:id",
+    component: GoodsDetailPage,
   },
 ];
 

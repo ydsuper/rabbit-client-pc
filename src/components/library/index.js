@@ -21,7 +21,7 @@ import lazy from "@/components/directives/lazy";
 //#region 【批量注册组件】
 // 1. 获取模块的路径集合 获取模块的导入函数
 const importFn = require.context("./", false, /\.vue$/);
-console.dir(importFn);
+// console.dir(importFn);
 // 2. 获取到导入的文件的路径
 const keys = importFn.keys();
 //#endregion
@@ -37,7 +37,7 @@ const library = {
     app.directive("lazy", lazy);
     // 3. 批量导入组件
     keys.forEach((item) => {
-      console.log("file:", item, importFn(item));
+      // console.log("file:", item, importFn(item));
       const component = importFn(item).default;
       app.component(component.name, component);
     });
