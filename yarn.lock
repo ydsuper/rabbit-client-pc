@@ -1447,6 +1447,11 @@
   resolved "https://registry.npmmirror.com/@vue/devtools-api/download/@vue/devtools-api-6.0.0-beta.20.tgz?cache=0&sync_timestamp=1635944976169&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vue%2Fdevtools-api%2Fdownload%2F%40vue%2Fdevtools-api-6.0.0-beta.20.tgz#b5405c9a84fb44687d05e7c4c7854b1639141106"
   integrity sha1-tUBcmoT7RGh9BefEx4VLFjkUEQY=
 
+"@vue/devtools-api@^6.0.0-beta.15":
+  version "6.0.0-beta.20.1"
+  resolved "https://repo.huaweicloud.com/repository/npm/@vue/devtools-api/-/devtools-api-6.0.0-beta.20.1.tgz#5b499647e929c35baf2a66a399578f9aa4601142"
+  integrity sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==
+
 "@vue/eslint-config-prettier@^6.0.0":
   version "6.0.0"
   resolved "https://registry.nlark.com/@vue/eslint-config-prettier/download/@vue/eslint-config-prettier-6.0.0.tgz#ad5912b308f4ae468458e02a2b05db0b9d246700"
@@ -8410,6 +8415,13 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.nlark.com/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+vee-validate@^4.5.6:
+  version "4.5.6"
+  resolved "https://repo.huaweicloud.com/repository/npm/vee-validate/-/vee-validate-4.5.6.tgz#0668edb8f043e657a634f8d0d057ee7460b59b14"
+  integrity sha512-9N0GgCskOkZ0aDvMNv+N40RO9g3T1vipgdEDqPWQlOqJnz5XlvJZnjMQvTuPQGlAd9TFaW+3gl11mxZDC1Mrsg==
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.15"
 
 vendors@^1.0.0:
   version "1.0.4"

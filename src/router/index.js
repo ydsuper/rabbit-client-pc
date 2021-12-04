@@ -15,6 +15,8 @@ const GoodsDetailPage = () =>
   import(
     /*webpackChunkName: 'GoodsDetailPage'*/ "@/views/goods/GoodsDetailPage"
   );
+const LoginPage = () =>
+  import(/*webpackChunkName: 'LoginPage'*/ "@/views/login/LoginPage");
 
 const routes = [
   {
@@ -32,6 +34,10 @@ const routes = [
   {
     path: "/goods/:id",
     component: GoodsDetailPage,
+  },
+  {
+    path: "/login",
+    component: LoginPage,
   },
 ];
 

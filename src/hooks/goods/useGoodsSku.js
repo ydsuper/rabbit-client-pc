@@ -1,7 +1,12 @@
+/**
+ * 商品规格筛选处理
+ * @tip comparatively complex
+ */
+
 import powerSet from "@/verdors/powerSet";
 import { computed } from "vue";
 
-export default function useGoodsSku(props) {
+export default function useGoodsSku(props, emit) {
   //#region 一、更新商品规格中的选中状态
   const updateSpecSelected = (spec, value) => {
     if (value.disabled) return;
@@ -14,6 +19,8 @@ export default function useGoodsSku(props) {
       value.selected = true;
     }
     updateDisabled(props.specs, pathMap);
+    // 回传数据
+    sendDataToParent(props.specs, pathMap, props.skus, emit);
   };
   //#endregion
 
@@ -57,11 +64,12 @@ export default function useGoodsSku(props) {
   //（更新禁用）
   const updateDisabled = (specs, pathMap) => {
     specs.forEach((spec, index) => {
-      if (userSelected.value[index]) return;
+      // if (userSelected.value[index]) return;
       console.log("判断undefined", spec.name); //@log
       const selected = JSON.parse(JSON.stringify(userSelected.value));
       console.log("当前选择", selected); //@log
       spec.values.forEach((value) => {
+        if (value.selected) return;
         selected[index] = value.name;
         console.log("判断选择", selected); //@log
         const key = selected.filter((item) => item).join("_");
@@ -90,16 +98,34 @@ export default function useGoodsSku(props) {
 
   //#region 五、设置默认选中
   const setDefaultSelected = (skuId, skus, specs) => {
+    if (!skuId) return;
     // const target = skus.find((sku) => (sku.id = skuId));
     // const defaultSelected = target.specs.map((item) => item.valueName);
     const defaultSelected = skus
-      .find((sku) => (sku.id = skuId))
+      .find((sku) => sku.id === skuId)
       .specs.map((item) => item.valueName);
     specs.forEach((spec, index) => {
       spec.values.forEach((value) => {
         if (value.name === defaultSelected[index]) value.selected = true;
       });
     });
+  };
+  //#endregion
+
+  //#region 六、数据回传给详情页
+  const sendDataToParent = (specs, pathMap, skus, emit) => {
+    const selected = userSelected.value.filter((item) => item);
+
+    if (selected.length === specs.length) {
+      const skuId = pathMap[selected.join("_")];
+      const target = skus.find((sku) => sku.id === skuId);
+      emit("onSpecChange", {
+        skuId,
+        price: target.price,
+        oldPrice: target.oldPrice,
+        inventory: target.inventory,
+      });
+    }
   };
   //#endregion
 

@@ -15,7 +15,6 @@ const user = {
   },
   mutations: {
     setUser(state, payload = {}) {
-      console.log(payload);
       state.profile = payload;
       // if (Object.getOwnPropertyNames(payload).length !== 0) {
       //   state.profile = Object.assign(state.profile, payload);

@@ -1,5 +1,5 @@
 /**
- * @homeAPI 分类页API
+ * @categoryAPI 分类页API
  */
 import request from "@/utils/request";
 

@@ -20,5 +20,15 @@ export default function useGoods() {
     getGoodsDetail(to.params.id);
   });
 
-  return result;
+  // 接收数据变化
+  const onSpecChange = (data) => {
+    result.value.price = data.price;
+    result.value.oldPrice = data.oldPrice;
+    result.value.inventory = data.inventory;
+  };
+
+  // 存储用户选择的商品数量
+  const count = ref(1);
+
+  return { result, onSpecChange, count };
 }

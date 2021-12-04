@@ -26,27 +26,41 @@
           <!-- 右侧 -->
           <div class="spec">
             <GoodsInfo :goods="goodsDetail" />
-            <!-- <GoodsSku :specs="goodsDetail.specs" :skus="goodsDetail.skus" />-->
-            <!-- skuId 此处为测试代码, 用完即删 -->
+            <!-- 商品规格选择 -->
             <GoodsSku
               :specs="goodsDetail.specs"
               :skus="goodsDetail.skus"
-              skuId="1369155864430120962"
+              @onSpecChange="onSpecChange"
             />
+            <XtxNumberBox
+              label="数量"
+              :max="goodsDetail.inventory"
+              v-model="count"
+            />
+            <XtxButton type="primary" :style="{ marginTop: '20px' }"
+              >加入购物车</XtxButton
+            >
           </div>
         </div>
         <!-- 商品推荐 -->
-        <GoodsRelevant></GoodsRelevant>
+        <GoodsRelevant :goodsId="goodsDetail.id"></GoodsRelevant>
         <!-- 商品详情 -->
         <div class="goods-footer">
           <div class="goods-article">
             <!-- 商品+评价 -->
-            <div class="goods-tabs"></div>
+            <GoodsTab />
             <!-- 注意事项 -->
-            <div class="goods-warn"></div>
+            <div class="goods-warn">
+              <!-- 注意事项 -->
+              <GoodsWarn />
+            </div>
           </div>
           <!-- 24热榜 -->
-          <div class="goods-aside"></div>
+          <div class="goods-aside">
+            <GoodsHot :type="1" />
+            <GoodsHot :type="2" />
+            <GoodsHot :type="3" />
+          </div>
         </div>
       </div>
     </div>
@@ -54,6 +68,7 @@
 </template>
 
 <script>
+import { provide } from "vue";
 import GoodsRelevant from "@/views/goods/components/GoodsRelevant";
 import AppLayout from "@/components/AppLayout";
 import useGoods from "@/hooks/goods/useGoods";
@@ -61,9 +76,15 @@ import GoodsImages from "@/views/goods/components/GoodsImages";
 import GoodsSales from "@/views/goods/components/GoodsSales";
 import GoodsInfo from "@/views/goods/components/GoodsInfo";
 import GoodsSku from "@/views/goods/components/GoodsSku";
+import GoodsTab from "@/views/goods/components/GoodsTab";
+import GoodsHot from "@/views/goods/components/GoodsHot";
+import GoodsWarn from "@/views/goods/components/GoodsWarn";
 export default {
   name: "GoodsDetailPage",
   components: {
+    GoodsWarn,
+    GoodsHot,
+    GoodsTab,
     GoodsSku,
     GoodsInfo,
     GoodsSales,
@@ -72,8 +93,11 @@ export default {
     AppLayout,
   },
   setup() {
-    const goodsDetail = useGoods();
-    return { goodsDetail };
+    const { result: goodsDetail, onSpecChange, count } = useGoods();
+    // 通过provide 注入goodsDetail数据
+    provide("goodsDetail", goodsDetail);
+
+    return { goodsDetail, onSpecChange, count };
   },
 };
 </script>
