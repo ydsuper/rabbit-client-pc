@@ -119,11 +119,15 @@ export default function useGoodsSku(props, emit) {
     if (selected.length === specs.length) {
       const skuId = pathMap[selected.join("_")];
       const target = skus.find((sku) => sku.id === skuId);
+      console.log("target", target);
       emit("onSpecChange", {
         skuId,
         price: target.price,
         oldPrice: target.oldPrice,
-        inventory: target.inventory,
+        inventory: target.inventory, //库存
+        specsText: target.specs //商品规格描述
+          .map((spec) => `${spec.name}:${spec.valueName}`)
+          .join(" "),
       });
     }
   };

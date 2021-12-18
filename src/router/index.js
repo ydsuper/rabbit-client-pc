@@ -17,6 +17,12 @@ const GoodsDetailPage = () =>
   );
 const LoginPage = () =>
   import(/*webpackChunkName: 'LoginPage'*/ "@/views/login/LoginPage");
+const LoginCallbackPage = () =>
+  import(
+    /*webpackChunkName: 'LoginPage'*/ "@/views/login/components/LoginCallbackPage"
+  );
+const CartPage = () =>
+  import(/*webpackChunkName: 'CartPage'*/ "@/views/cart/CartPage");
 
 const routes = [
   {
@@ -39,6 +45,11 @@ const routes = [
     path: "/login",
     component: LoginPage,
   },
+  {
+    path: "/login/callback",
+    component: LoginCallbackPage,
+  },
+  { path: "/cart", component: CartPage },
 ];
 
 const router = createRouter({

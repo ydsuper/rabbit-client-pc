@@ -10,9 +10,9 @@ import XtxMessage from "@/components/library/XtxMessage";
 const container = document.createElement("div");
 document.body.appendChild(container);
 
-export default function Message({ type, text, time }) {
+export default function Message({ type, text, time = 3000 }) {
   let timer = null;
-  const TIME = time || 3000; //销毁时间
+  const TIME = time; //销毁时间
   const oDiv = document.createElement("div");
   // 3.将目标vue组件渲染成虚拟 DOM 对象
   const vnode = createVNode(XtxMessage, { type, text });
@@ -23,8 +23,9 @@ export default function Message({ type, text, time }) {
 
   clearTimeout(timer);
   timer = setTimeout(() => {
-    // render(null, container);
+    // 动画效果隐藏提示
     vnode.component.proxy.show = false;
+    // 清除虚拟dom
     // container._vnode = null; //方式一
     render(null, container); //方式二
     setTimeout(() => container.removeChild(oDiv), 50);

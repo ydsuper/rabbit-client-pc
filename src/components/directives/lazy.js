@@ -34,4 +34,6 @@ const lazy = {
   },
 };
 
-export default lazy;
+export default function directiveLazy(app) {
+  app.directive("lazy", lazy);
+}

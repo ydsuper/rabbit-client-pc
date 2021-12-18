@@ -38,7 +38,7 @@ const category = {
      */
     async getCategories({ commit }) {
       const data = await getCategoriesAPI();
-      console.log("res", data);
+      console.log("res", data); //@log
       // 为每一个元素添加open属性（下拉菜单展示属性）
       data.result.forEach((item) => (item.open = false));
       commit("setCategories", data.result);

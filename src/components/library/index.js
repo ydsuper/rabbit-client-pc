@@ -15,7 +15,7 @@
 //#endregion
 
 //#region 【全局指令】
-import lazy from "@/components/directives/lazy";
+import directiveLazy from "@/components/directives/lazy";
 //#endregion
 
 // 导入Message
@@ -37,7 +37,8 @@ const library = {
     // app.component(XtxMore.name, XtxMore);
     // app.component(XtxBread.name, XtxBread);
     // app.component(XtxBreadItem.name, XtxBreadItem);
-    app.directive("lazy", lazy);
+    // 注册指令
+    directiveLazy(app);
     // 3. 批量导入组件
     keys.forEach((item) => {
       // console.log("file:", item, importFn(item));
