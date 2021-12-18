@@ -1,5 +1,7 @@
 import { useField, useForm } from "vee-validate";
 import { account, password, isAgree } from "@/utils/vee-validate-schema";
+import { loginByAccountAndPassword } from "@/api/user";
+import useLoginAfter from "@/hooks/login/useLoginAfter";
 
 export default function useAccountFormValidate() {
   // 创建账号登陆表单验证
@@ -22,12 +24,16 @@ export default function useAccountFormValidate() {
     useField("isAgree");
 
   //#默认
-  accountField.value = "xiaotuxian001";
-  passwordField.value = "123456";
+  accountField.value = "ydsuper";
+  passwordField.value = "123123";
+
+  // 登录成功/失败 操作方法
+  const { loginSuccessFn, loginFailedFn } = useLoginAfter();
 
   //#region 账号登录
   const onAccountFormSubmit = accountFormHandleSubmit((value) => {
-    console.log(value);
+    // console.log(value); //@log
+    loginByAccountAndPassword(value).then(loginSuccessFn).catch(loginFailedFn);
   });
   //#endregion
 

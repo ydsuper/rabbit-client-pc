@@ -1,5 +1,4 @@
 <template>
-  <button @click="$message({ type: 'success', text: '测试' })">弹窗</button>
   <LoginHeader>欢迎登录</LoginHeader>
   <section class="login-section">
     <div class="wrapper">
@@ -38,6 +37,10 @@ export default {
   components: { LoginForm, LoginFooter, LoginHeader },
   setup() {
     const activeName = ref("account");
+
+    // const { proxy } = getCurrentInstance(); // 获取当前组件实例
+    // proxy.$message({ type: "warn", text: "测试" });
+
     return { activeName };
   },
 };

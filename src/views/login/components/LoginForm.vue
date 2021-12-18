@@ -77,7 +77,12 @@
                 placeholder="请输入验证码"
                 v-model="codeField"
               />
-              <span class="code">发送验证码</span>
+              <span
+                class="code"
+                :class="{ disabled: isActive }"
+                @click="getMsgCode"
+                >{{ isActive ? `剩余${count}秒` : "发送验证码" }}</span
+              >
             </div>
             <div class="error" v-if="codeError">
               <i class="iconfont icon-warning">{{ codeError }}</i>
@@ -100,10 +105,17 @@
       </template>
     </div>
     <div class="action">
-      <img
-        src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
-        alt=""
-      />
+      <!-- QQ登录按钮 -->
+      <!-- <span id="qqLoginBtn"> </span>-->
+      <!-- <img src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png" alt="" /> -->
+      <a
+        href="https://graph.qq.com/oauth2.0/authorize?client_id=100556005&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fwww.corho.com%3A8080%2F%23%2Flogin%2Fcallback"
+      >
+        <img
+          src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
+          alt="QQ登录"
+        />
+      </a>
       <div class="url">
         <a href="javascript:">忘记密码</a>
         <a href="javascript:">免费注册</a>
@@ -112,7 +124,7 @@
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { getCurrentInstance, ref } from "vue";
 import useAccountFormValidate from "@/hooks/login/useAccountFormValidate";
 import useMobileFormValidate from "@/hooks/login/useMobileFormValidate";
 
@@ -122,9 +134,19 @@ export default {
     // 是否为短信登录
     const isMsgLogin = ref(false);
 
+    const { proxy } = getCurrentInstance();
+
     const { onAccountFormSubmit, ...accountFormValid } =
       useAccountFormValidate();
-    const { onMobileFormSubmit, ...mobileFormValid } = useMobileFormValidate();
+    const { onMobileFormSubmit, ...mobileFormValid } =
+      useMobileFormValidate(proxy);
+
+    // onMounted(() => {
+    //   // 加载QQ登录按钮
+    //   window.QC.Login({
+    //     btnId: "qqLoginBtn",
+    //   });
+    // });
 
     return {
       isMsgLogin,
