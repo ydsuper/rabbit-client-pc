@@ -1,3 +1,4 @@
+==ww22ww
 <template>
   <button class="xtx-button ellipsis" :class="[size, type]">
     <slot></slot>

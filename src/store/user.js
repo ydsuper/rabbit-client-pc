@@ -11,6 +11,8 @@ const user = {
         mobile: "", //用户手机号
         token: "", //用户登录令牌
       },
+      // 重定向地址
+      redirectURL: "",
     };
   },
   mutations: {
@@ -24,6 +26,10 @@ const user = {
     },
     setToken(state, payload = "") {
       state.profile.token = payload;
+    },
+    // 设置重定向地址
+    setRedirectURL(state, payload = "") {
+      state.redirectURL = payload;
     },
   },
   actions: {},

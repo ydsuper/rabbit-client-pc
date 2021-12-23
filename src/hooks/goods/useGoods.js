@@ -54,7 +54,7 @@ export default function useGoods() {
       selected: true, //是否选中
       stock: result.value.inventory, //商品库存
       count: count.value, //用户选择的商品数量
-      isEffective: false, //如果商品选择了规格，该商品就一定是有效商品，因为能够选择的规格都是有库存的
+      isEffective: true, //如果商品选择了规格，该商品就一定是有效商品，因为能够选择的规格都是有库存的
     };
     // console.log(goods); //@log
 

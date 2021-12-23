@@ -83,7 +83,10 @@ export default {
 
       // 获取 QQ个人信息
       window.QC.api("get_user_info").success((res) => {
-        console.log(res);
+        console.log("user_info", res);
+      });
+      window.QC.api("getUnionId").success((res) => {
+        console.log("unionid", res);
       });
     }
 

@@ -91,5 +91,6 @@ export default function useBindNewAccountFormValid(props) {
     getMsgCode,
     count,
     start,
+    isActive,
   };
 }

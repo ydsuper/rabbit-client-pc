@@ -55,6 +55,10 @@
                         {{ goods.name }}
                       </p>
                       <!-- 选择规格组件 -->
+                      <CartSku
+                        :skuId="goods.skuId"
+                        :attrsText="goods.attrsText"
+                      />
                     </div>
                   </div>
                 </td>
@@ -70,7 +74,16 @@
                   </p>
                 </td>
                 <td class="tc">
-                  <XtxNumberBox v-model="goods.count" :max="100"></XtxNumberBox>
+                  <XtxNumberBox
+                    v-model="goods.count"
+                    :max="goods.stock"
+                    @update:modelValue="
+                      changeGoodsCountOfCartBySkuId({
+                        skuId: goods.skuId,
+                        count: $event,
+                      })
+                    "
+                  ></XtxNumberBox>
                 </td>
                 <td class="tc">
                   <p class="f16 red">
@@ -129,16 +142,30 @@
         <!-- 操作栏 -->
         <div class="action">
           <div class="batch">
-            <XtxCheckbox>全选</XtxCheckbox>
-            <a href="javascript:">删除商品</a>
+            <XtxCheckbox
+              :modelValue="selectAllButtonStatus"
+              @update:modelValue="$store.dispatch('cart/selectedAll', $event)"
+              >全选</XtxCheckbox
+            >
+            <a
+              href="javascript:"
+              @click="deleteBatchGoodsOfCart('userSelectedGoodsList')"
+              >删除商品</a
+            >
             <a href="javascript:">移入收藏夹</a>
-            <a href="javascript:">清空失效商品</a>
+            <a
+              href="javascript:"
+              @click="deleteBatchGoodsOfCart('invalidGoodsList')"
+              >清空失效商品</a
+            >
           </div>
           <div class="total">
             共 {{ effectiveGoodsCount }} 件商品，已选择
             {{ userSelectedGoodsCount }} 件，商品合计：
             <span class="red">¥{{ userSelectedGoodsPrice }}</span>
-            <XtxButton type="primary">下单结算</XtxButton>
+            <XtxButton type="primary" @click="jumpToCheckout"
+              >下单结算</XtxButton
+            >
           </div>
         </div>
         <!-- 猜你喜欢 -->
@@ -150,11 +177,12 @@
 <script>
 import GoodsRelevant from "@/views/goods/components/GoodsRelevant";
 import AppLayout from "@/components/AppLayout";
-import useCart from "../../hooks/cart/useCart";
+import useCart from "@/hooks/cart/useCart";
 import EmptyCart from "./components/EmptyCart";
+import CartSku from "./components/CartSku";
 export default {
   name: "CartPage",
-  components: { EmptyCart, GoodsRelevant, AppLayout },
+  components: { CartSku, EmptyCart, GoodsRelevant, AppLayout },
   setup() {
     const {
       effectiveGoodsList,
@@ -165,6 +193,9 @@ export default {
       userSelectedGoodsPrice,
       updateCartList,
       selectAllButtonStatus,
+      deleteBatchGoodsOfCart,
+      changeGoodsCountOfCartBySkuId,
+      jumpToCheckout,
     } = useCart();
 
     // 更新本地购物车信息
@@ -178,6 +209,9 @@ export default {
       userSelectedGoodsCount,
       userSelectedGoodsPrice,
       selectAllButtonStatus,
+      deleteBatchGoodsOfCart,
+      changeGoodsCountOfCartBySkuId,
+      jumpToCheckout,
     };
   },
 };

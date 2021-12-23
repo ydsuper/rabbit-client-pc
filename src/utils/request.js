@@ -93,8 +93,8 @@ const baseRequest = (options) => {
   if (options.withToken) {
     // 添加 鉴权token
     options.headers = {
-      // authorization: store.state['user'].profile.token,
-      Authorization: "Bearer xxxxxx",
+      // Authorization: "Bearer xxxxxx",
+      Authorization: `Bearer ${store.state["user"].profile.token}`,
     };
   }
 
@@ -131,7 +131,7 @@ const baseRequest = (options) => {
 };
 
 // 封装 请求
-const request = ["post", "put", "patch"].reduce((request, method) => {
+const request = ["post", "put", "patch", "delete"].reduce((request, method) => {
   /**
    * 给请求添加方法
    * @param {*} url 请求路由
@@ -146,7 +146,7 @@ const request = ["post", "put", "patch"].reduce((request, method) => {
   return request;
 }, {});
 
-["get", "delete", "head"].forEach((method) => {
+["get", "head"].forEach((method) => {
   /**
    * @param url string 接口地址
    * @param params object get参数

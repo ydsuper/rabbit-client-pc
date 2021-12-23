@@ -18,5 +18,11 @@ module.exports = {
       .use("url-loader")
       .loader("url-loader")
       .tap((options) => Object.assign(options, { limit: 10000 }));
+    config.plugin("html").tap((args) => {
+      args[0].title = "小兔鲜儿 - PC !";
+      return args;
+    });
+    // 修复HMR（热更新）
+    //config.resolve.symlinks(true);
   },
 };

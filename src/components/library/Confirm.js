@@ -19,6 +19,7 @@ export default function Confirm({ title, content }) {
     const onRemoveFade = () => {
       vnode.el.classList.remove("fade");
       vnode.el.children[0].classList.remove("fade");
+      // 移除虚拟dom可重新渲染，动画时间400ms
       setTimeout(() => {
         render(null, container); //清除虚拟dom
       }, 400);
@@ -35,6 +36,7 @@ export default function Confirm({ title, content }) {
     // 2.将虚拟dom 渲染成真实dom
     render(vnode, container);
 
+    // 添加动画类名（下一个主任务）
     setTimeout(() => {
       vnode.el.classList.add("fade");
       vnode.el.children[0].classList.add("fade");

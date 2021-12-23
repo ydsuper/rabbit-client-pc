@@ -1,28 +1,16 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import authGuard from "./authGuard";
 // import HomePage from "../views/home/HomePage.vue";
 
-const HomePage = () =>
-  import(/*webpackChunkName: 'HomePage'*/ "@/views/home/HomePage");
-const TopCategoryPage = () =>
-  import(
-    /*webpackChunkName: 'CategoryPage'*/ "@/views/category/TopCategoryPage"
-  );
-const SubCategoryPage = () =>
-  import(
-    /*webpackChunkName: 'CategoryPage'*/ "@/views/category/SubCategoryPage"
-  );
-const GoodsDetailPage = () =>
-  import(
-    /*webpackChunkName: 'GoodsDetailPage'*/ "@/views/goods/GoodsDetailPage"
-  );
-const LoginPage = () =>
-  import(/*webpackChunkName: 'LoginPage'*/ "@/views/login/LoginPage");
+const HomePage = () => import("@/views/home/HomePage");
+const TopCategoryPage = () => import("@/views/category/TopCategoryPage");
+const SubCategoryPage = () => import("@/views/category/SubCategoryPage");
+const GoodsDetailPage = () => import("@/views/goods/GoodsDetailPage");
+const LoginPage = () => import("@/views/login/LoginPage");
 const LoginCallbackPage = () =>
-  import(
-    /*webpackChunkName: 'LoginPage'*/ "@/views/login/components/LoginCallbackPage"
-  );
-const CartPage = () =>
-  import(/*webpackChunkName: 'CartPage'*/ "@/views/cart/CartPage");
+  import("@/views/login/components/LoginCallbackPage");
+const CartPage = () => import("@/views/cart/CartPage");
+const CheckoutPage = () => import("@/views/pay/CheckoutPage");
 
 const routes = [
   {
@@ -50,6 +38,7 @@ const routes = [
     component: LoginCallbackPage,
   },
   { path: "/cart", component: CartPage },
+  { path: "/checkout/order", component: CheckoutPage },
 ];
 
 const router = createRouter({
@@ -60,5 +49,8 @@ const router = createRouter({
     return { top: 0 };
   },
 });
+
+// 路由守卫——登录拦截
+router.beforeEach(authGuard);
 
 export default router;

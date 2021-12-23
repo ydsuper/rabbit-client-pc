@@ -43,6 +43,7 @@ const library = {
     keys.forEach((item) => {
       // console.log("file:", item, importFn(item));
       const component = importFn(item).default;
+      // console.log(component);  //@log
       app.component(component.name, component);
     });
     // 将 Message 方法挂载到全局属性中

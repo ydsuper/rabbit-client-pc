@@ -119,7 +119,8 @@ export default function useGoodsSku(props, emit) {
     if (selected.length === specs.length) {
       const skuId = pathMap[selected.join("_")];
       const target = skus.find((sku) => sku.id === skuId);
-      console.log("target", target);
+      console.log("target", target); //@log
+      // 触发父组件传递的方法
       emit("onSpecChange", {
         skuId,
         price: target.price,

@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <RouterLink class="curr" to="/cart">
-      <i class="iconfont icon-cart"></i><em>2</em>
+      <i class="iconfont icon-cart"></i><em>{{ effectiveGoodsCount }}</em>
     </RouterLink>
     <div class="layer" v-if="effectiveGoodsCount > 0 && !isCartPage">
       <div class="list">
