@@ -100,6 +100,7 @@ export default {
     };
     //#endregion
 
+    //#region 城市数据（计算属性）
     const list = computed(() => {
       let list = cityData.value;
       if (selectedCityData.provinceCode) {
@@ -114,7 +115,7 @@ export default {
       }
       if (selectedCityData.countyCode) {
         // 将数据传递给父组件
-        emit("cityChanged", { ...selectedCityData });
+        emit("onCityChanged", { ...selectedCityData });
         // 重置数据选择
         list = cityData.value;
         // 隐藏弹框
@@ -122,6 +123,7 @@ export default {
       }
       return list;
     });
+    //#endregion
 
     return {
       visible,

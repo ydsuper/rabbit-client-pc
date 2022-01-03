@@ -12,7 +12,7 @@
     </dl>
     <dl>
       <dt>配送</dt>
-      <dd>至 <XtxCity :location="location" @cityChanged="cityChanged" /></dd>
+      <dd>至 <XtxCity :location="location" @onCityChanged="cityChanged" /></dd>
     </dl>
     <dl>
       <dt>服务</dt>

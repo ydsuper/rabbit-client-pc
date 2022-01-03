@@ -112,7 +112,7 @@ const baseRequest = (options) => {
       // 请求成功时
       if (res.status === 200 || res.status === 201) {
         // 401时，代表token出现问题
-        if (data.status === 401) {
+        if ({ 400: 1, 401: 1 }[data.status]) {
           // 移除token
           store.commit("user/setToken", "");
           router.push("/login").then(() => {});

@@ -8,6 +8,7 @@
 <script>
 // import { ref, watchEffect } from "vue";
 import { useVModel } from "@vueuse/core";
+import { unref } from "vue";
 export default {
   name: "XtxCheckbox",
   props: {
@@ -21,7 +22,8 @@ export default {
     // useVModel 实现双向数据绑定（返回值是一个新的响应式数据,可在当前模板中直接使用）
     const isChecked = useVModel(props, "modelValue", emit);
     const toggle = () => {
-      isChecked.value = !isChecked.value;
+      // isChecked.value = !isChecked.value;
+      isChecked.value = !unref(isChecked); //unref:参数是一个ref，则返回内部值，否则返回参数本身
       // 监听内布值变化，同步给外部值
       // emit("update:modelValue", isChecked.value);
     };

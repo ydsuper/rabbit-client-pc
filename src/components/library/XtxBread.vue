@@ -21,9 +21,9 @@ export default {
   name: "XtxBread",
   // 使用 Javascript 编写组件模板
   render() {
-    console.log("slots:", this.$slots.default());
+    // console.log("slots:", this.$slots.default()); //@log
     // 获取插槽内容（Array）
-    const slots = this.$slots.default();
+    const slots = this.$slots.default && this.$slots.default();
     // children
     let children = [];
     slots.forEach((item, index) => {

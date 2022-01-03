@@ -19,10 +19,11 @@ module.exports = {
       .loader("url-loader")
       .tap((options) => Object.assign(options, { limit: 10000 }));
     config.plugin("html").tap((args) => {
-      args[0].title = "小兔鲜儿 - PC !";
+      args[0].title = "小兔鲜儿 - 新鲜 惠民 快捷！";
+      // args[0].title = "学习QQ登录 - 其他 - YDSUPER";
       return args;
     });
     // 修复HMR（热更新）
-    //config.resolve.symlinks(true);
+    config.resolve.symlinks(true);
   },
 };

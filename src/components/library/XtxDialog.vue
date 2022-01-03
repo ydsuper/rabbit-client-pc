@@ -53,6 +53,9 @@ export default {
     fade: {
       mounted(el) {
         // el.classList.add("fade");
+        // setTimeout(() => { //可以使用它，但不是最适合的（周期比较靠后）
+        //   el.classList.add("fade");
+        // },0);
         /**
          * 【requestAnimationFrame】
          * 1.要求浏览器在下次重绘之前调用指定的回调函数更新动画

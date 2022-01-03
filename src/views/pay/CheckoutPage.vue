@@ -11,7 +11,7 @@
           <!-- 收货地址 -->
           <h3 class="box-title">收货地址</h3>
           <div class="box-body">
-            <CheckoutAddress />
+            <CheckoutAddress ref="checkoutAddressInstance" />
           </div>
           <!-- 商品信息 -->
           <h3 class="box-title">商品信息</h3>
@@ -87,7 +87,9 @@
           </div>
           <!-- 提交订单 -->
           <div class="submit">
-            <XtxButton type="primary">提交订单</XtxButton>
+            <XtxButton type="primary" @click="onSubmitOrder"
+              >提交订单</XtxButton
+            >
           </div>
         </div>
       </div>
@@ -102,9 +104,10 @@ export default {
   name: "CheckoutPage",
   components: { CheckoutAddress, AppLayout },
   setup() {
-    const { order } = useCheckout();
+    // 获取订单
+    const { order, checkoutAddressInstance, onSubmitOrder } = useCheckout();
 
-    return { order };
+    return { order, checkoutAddressInstance, onSubmitOrder };
   },
 };
 </script>

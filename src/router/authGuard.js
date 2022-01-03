@@ -12,7 +12,6 @@ export default function authGuard(to, from, next) {
 
   // 判断前往的页面是否需要拦截守卫
   if (requireLogin.includes(to.path.split("/")[1])) {
-    console.log(store, store.state.user.profile.token);
     // 判断用户是否登录
     if (!store.state.user.profile.token) {
       // 记录重定向地址

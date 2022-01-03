@@ -1,48 +1,79 @@
 <template>
-  <XtxDialog v-model:visible="visible" title="添加收货地址">
+  <XtxDialog
+    v-model:visible="visible"
+    :title="`${address?.id ? '修改' : '添加'}收货地址`"
+  >
     <template v-slot:default>
       <div class="address-edit">
         <div class="xtx-form">
           <div class="xtx-form-item">
             <div class="label">收货人：</div>
             <div class="field">
-              <input class="input" placeholder="请输入收货人" />
+              <input
+                class="input"
+                placeholder="请输入收货人"
+                v-model="address.receiver"
+              />
             </div>
           </div>
           <div class="xtx-form-item">
             <div class="label">手机号：</div>
             <div class="field">
-              <input class="input" placeholder="请输入手机号" />
+              <input
+                class="input"
+                placeholder="请输入手机号"
+                v-model="address.contact"
+              />
             </div>
           </div>
           <div class="xtx-form-item">
             <div class="label">地区：</div>
             <div class="field">
-              <XtxCity placeholder="请选择所在地区" />
+              <XtxCity
+                :location="location"
+                @onCityChanged="onCityChanged"
+                placeholder="请选择所在地区"
+              />
             </div>
           </div>
           <div class="xtx-form-item">
             <div class="label">详细地址：</div>
             <div class="field">
-              <input class="input" placeholder="请输入详细地址" />
+              <input
+                class="input"
+                placeholder="请输入详细地址"
+                v-model="address.address"
+              />
             </div>
           </div>
           <div class="xtx-form-item">
             <div class="label">邮政编码：</div>
             <div class="field">
-              <input class="input" placeholder="请输入邮政编码" />
+              <input
+                class="input"
+                placeholder="请输入邮政编码"
+                v-model="address.postalCode"
+              />
             </div>
           </div>
           <div class="xtx-form-item">
             <div class="label">地址标签：</div>
             <div class="field">
-              <input class="input" placeholder="请输入地址标签，逗号分隔" />
+              <input
+                class="input"
+                placeholder="请输入地址标签，逗号分隔"
+                v-model="address.addressTags"
+              />
             </div>
           </div>
           <div class="xtx-form-item">
             <div class="label">是否设置为默认地址：</div>
             <div class="field">
-              <input type="checkbox" class="checkbox" />
+              <input
+                type="checkbox"
+                class="checkbox"
+                v-model="address.isDefault"
+              />
             </div>
           </div>
         </div>
@@ -62,17 +93,29 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import useCheckoutAddressEdit from "@/hooks/order/useCheckoutAddressEdit";
 
 export default {
   name: "AddressEdit",
-  setup() {
-    // 用于控制弹框是否显示
-    const visible = ref(true);
-    // 用于执行用户点击确定按钮之后的逻辑代码
-    const onSureClickHandler = () => {};
+  setup(props, { emit }) {
+    // 导入城市信息方法
+    const {
+      visible,
+      location,
+      address,
+      onCityChanged,
+      onSureClickHandler,
+      xtxCityInstance,
+    } = useCheckoutAddressEdit(emit);
 
-    return { visible, onSureClickHandler };
+    return {
+      visible,
+      location,
+      address,
+      onCityChanged,
+      onSureClickHandler,
+      xtxCityInstance,
+    };
   },
 };
 </script>

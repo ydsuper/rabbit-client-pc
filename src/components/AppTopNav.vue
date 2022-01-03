@@ -4,9 +4,9 @@
       <ul>
         <template v-if="user.profile.token">
           <li>
-            <a href="javascript:"
-              ><i class="iconfont icon-user"></i>{{ user.profile.account }}</a
-            >
+            <RouterLink to="/member/home">
+              <i class="iconfont icon-user"></i>{{ user.profile.account }}
+            </RouterLink>
           </li>
           <li><a href="javascript:" @click="logout(this)">退出登录</a></li>
         </template>
